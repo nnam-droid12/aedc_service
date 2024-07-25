@@ -12,8 +12,8 @@
     "production": "nodemon --exec node --env-file=.env.production --loader ts-node/esm src/index.ts",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --coverage",
     "test:watch": "jest --watch",
-    "lint": "eslint --ignore-pattern .eslintignore --ext .js,.ts .",
-    "lint-fix": "eslint --ignore-pattern .eslintignore --ext .js,.ts . --fix",
+    "lint": "eslint --ignore-patter .eslintignore --ext .js,.ts .",
+    "lint-fix": "eslint --ignore-patter .eslintignore --ext .js,.ts . --fix",
     "format": "npx prettier --write .",
     "prepare": "husky && husky install"
   },
