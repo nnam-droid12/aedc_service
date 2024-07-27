@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import mongoose, { Model, Schema, UpdateQuery } from 'mongoose';
 
+import { STAFF_ROLE, StaffDoc } from '../../types/staff/staff.js';
 import {
   BaseModelMethods,
   findActive,
@@ -9,7 +10,6 @@ import {
   findAndPopulate,
   findOneActive
 } from '../methods/methods.js';
-import { STAFF_ROLE, StaffDoc } from '../../types/staff/staff.js';
 
 type BaseDocument<T> = {
   _doc: T;

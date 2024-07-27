@@ -1,9 +1,10 @@
 import { Types } from 'mongoose';
+
 import { AdvancedQueryResult } from '../queryresults.js';
 
 export enum STAFF_ROLE {
   ADMIN = 'admin',
-  INSTALLER = 'installer',
+  INSTALLER = 'installer'
 }
 
 export type StaffDoc = {
@@ -26,6 +27,8 @@ export type StaffDoc = {
   newPassword?: string;
 };
 
-export type SanitizedStaffDoc = Omit<StaffDoc, 'password'>
+export type SanitizedStaffDoc = Omit<StaffDoc, 'password'>;
 
-export type AdvancedStaffsQueryResult = AdvancedQueryResult<SanitizedStaffDoc>
+export type AdvancedStaffsQueryResult = AdvancedQueryResult<SanitizedStaffDoc>;
+
+export type RegisterStaffRequestBody = Omit<StaffDoc, '_id' | 'createdAt' | 'updatedAt'>;
