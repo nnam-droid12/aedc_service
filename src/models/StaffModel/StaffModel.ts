@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import mongoose, { Model, Schema, UpdateQuery } from 'mongoose';
 
-import { STAFF_ROLE, StaffDoc } from '../../types/staff/staff.js';
+import { STAFF_REGION, STAFF_ROLE, StaffDoc } from '../../types/staff/staff.js';
 import {
   BaseModelMethods,
   findActive,
@@ -48,6 +48,10 @@ const staffSchema = new mongoose.Schema<StaffDocumentResult, StaffModel>(
     role: {
       type: String,
       enum: STAFF_ROLE
+    },
+    staffRegion: {
+      type: String,
+      enum: STAFF_REGION
     },
     createdBy: {
       type: Schema.Types.ObjectId,

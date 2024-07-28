@@ -14,7 +14,7 @@ import { RegisterStaffRequestBody, StaffDoc } from '../types/staff/staff.js';
 
 export const createStaff = async (req: Request, res: Response) => {
   const body = req.body as RegisterStaffRequestBody;
-  const { email, phoneNumber, nickName, fullName, role } = body;
+  const { email, phoneNumber, nickName, fullName, role, staffRegion } = body;
   const createdBy = req.staff._id;
   const password = passwordGenerator();
   try {
@@ -22,7 +22,7 @@ export const createStaff = async (req: Request, res: Response) => {
     if (error) {
       return res.status(422).json({ error: error.details[0].message });
     }
-    const newStaff = new Staff({ email, password, phoneNumber, nickName, fullName, role, createdBy });
+    const newStaff = new Staff({ email, password, phoneNumber, nickName, fullName, role, createdBy, staffRegion });
     await newStaff.save();
     newStaff.password = password;
     return res.status(201).json({

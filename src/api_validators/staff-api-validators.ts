@@ -3,6 +3,7 @@ import Joi from '@hapi/joi';
 export const createStaffApiValidator = Joi.object({
   fullName: Joi.string().required(),
   role: Joi.string().valid('admin', 'installer').required(),
+  staffRegion: Joi.string().valid('nassarawa', 'abuja', 'kogi', 'niger').required(),
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .required(),

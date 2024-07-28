@@ -7,6 +7,13 @@ export enum STAFF_ROLE {
   INSTALLER = 'installer'
 }
 
+export enum STAFF_REGION {
+  ABUJA = 'abuja',
+  NASSARAWA = 'nassarawa',
+  KOGI = 'kogi',
+  NIGER = 'niger'
+}
+
 export type StaffDoc = {
   _id: Types.ObjectId;
   id: string;
@@ -16,6 +23,7 @@ export type StaffDoc = {
   fullName: string;
   phoneNumber: string;
   role: STAFF_ROLE;
+  staffRegion: STAFF_REGION;
   createdBy: Types.ObjectId;
   department: Types.ObjectId;
   createdAt: Date;
