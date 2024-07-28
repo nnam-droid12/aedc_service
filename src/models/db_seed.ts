@@ -1,7 +1,7 @@
 import Logger from '../libs/logger.js';
 import Staff from './StaffModel/StaffModel.js';
 
-const userSeedData = [
+const staffSeedData = [
   {
     _id: '66056a0b8cddbeac52b7221f',
     email: process.env.DEFAULT_APP_EMAIL,
@@ -39,7 +39,7 @@ export const seedDBdata = async () => {
   try {
     const staffCount = await Staff.countDocuments();
     if (staffCount < 1) {
-      await Staff.create(userSeedData);
+      await Staff.create(staffSeedData);
       Logger.info('Staff Data Seeded Succesfully ....');
     }
   } catch (error) {

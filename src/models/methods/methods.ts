@@ -34,8 +34,7 @@ export const findAllActiveAndPopulate = function <T>(this: Model<T>, query: Filt
 
 export const populateFields = <T>(model: Model<T>) => {
   const populateOptions: Record<string, Array<{ path: string; select: string }>> = {
-    Staff: [{ path: 'createdBy', select: 'fullName -_id' }],
-
+    Staff: [{ path: 'createdBy', select: 'fullName -_id' }]
   };
 
   const modelName = model.modelName;

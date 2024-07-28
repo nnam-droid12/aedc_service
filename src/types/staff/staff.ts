@@ -1,9 +1,17 @@
 import { Types } from 'mongoose';
+
 import { AdvancedQueryResult } from '../queryresults.js';
 
 export enum STAFF_ROLE {
   ADMIN = 'admin',
-  INSTALLER = 'installer',
+  INSTALLER = 'installer'
+}
+
+export enum STAFF_REGION {
+  ABUJA = 'abuja',
+  NASSARAWA = 'nassarawa',
+  KOGI = 'kogi',
+  NIGER = 'niger'
 }
 
 export type StaffDoc = {
@@ -15,6 +23,7 @@ export type StaffDoc = {
   fullName: string;
   phoneNumber: string;
   role: STAFF_ROLE;
+  staffRegion: STAFF_REGION;
   createdBy: Types.ObjectId;
   department: Types.ObjectId;
   createdAt: Date;
@@ -26,6 +35,8 @@ export type StaffDoc = {
   newPassword?: string;
 };
 
-export type SanitizedStaffDoc = Omit<StaffDoc, 'password'>
+export type SanitizedStaffDoc = Omit<StaffDoc, 'password'>;
 
-export type AdvancedStaffsQueryResult = AdvancedQueryResult<SanitizedStaffDoc>
+export type AdvancedStaffsQueryResult = AdvancedQueryResult<SanitizedStaffDoc>;
+
+export type RegisterStaffRequestBody = Omit<StaffDoc, '_id' | 'createdAt' | 'updatedAt'>;
