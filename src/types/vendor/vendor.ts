@@ -12,8 +12,8 @@ export type VendorDoc = {
   isActive: boolean;
 };
 
-export type SanitizedVendorDoc = Omit<VendorDoc, 'phoneNumber'>;
 
-export type AdvancedVendorsQueryResult = AdvancedQueryResult<SanitizedVendorDoc>;
+
+export type AdvancedStaffsQueryResult = AdvancedQueryResult<VendorDoc>;
 
 export type RegisterVendorRequestBody = Omit<VendorDoc, '_id' | 'createdAt' | 'updatedAt'>;
