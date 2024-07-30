@@ -1,6 +1,6 @@
 import mongoose, { Model, Schema } from 'mongoose';
 
-import { DepartmentDoc } from '../../types/department/department.js';
+import { DepartmentDoc } from '../../types/department.js';
 import {
   BaseModelMethods,
   findActive,
