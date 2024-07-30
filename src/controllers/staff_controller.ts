@@ -22,7 +22,17 @@ export const createStaff = async (req: Request, res: Response) => {
     if (error) {
       return res.status(422).json({ error: error.details[0].message });
     }
-    const newStaff = new Staff({ email, password, phoneNumber, nickName, fullName, role, createdBy, staffRegion });
+    const newStaff = new Staff({
+      email,
+      password,
+      phoneNumber,
+      nickName,
+      fullName,
+      role,
+      createdBy,
+      staffRegion,
+      permissions: []
+    });
     await newStaff.save();
     newStaff.password = password;
     return res.status(201).json({
@@ -64,7 +74,7 @@ export const loginStaff = async (req: Request, res: Response) => {
     return res.status(200).json({
       status: 'success',
       token,
-      ...returnedStaff
+      staff: { ...returnedStaff }
     });
   } catch (error) {
     Logger.error(error);
@@ -132,5 +142,26 @@ export const getStaff = async (req: Request, res: Response) => {
   } catch (error) {
     Logger.error(error);
     return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+export const authorizeStaff = (req: Request, res: Response) => {
+  try {
+    const staff = req.staff;
+    if (staff) {
+      return res.status(200).json({
+        status: 'success',
+        staff
+      });
+    } else {
+      return res.status(200).json({
+        status: 'failed'
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      status: 'failed',
+      error
+    });
   }
 };
