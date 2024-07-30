@@ -23,6 +23,7 @@ export type StaffDoc = {
   fullName: string;
   phoneNumber: string;
   role: STAFF_ROLE;
+  permissions: string[];
   staffRegion: STAFF_REGION;
   createdBy: Types.ObjectId;
   department: Types.ObjectId;

@@ -49,6 +49,12 @@ const staffSchema = new mongoose.Schema<StaffDocumentResult, StaffModel>(
       type: String,
       enum: STAFF_ROLE
     },
+    permissions: [
+      {
+        type: String,
+        required: [true, 'Please Add permissions']
+      }
+    ],
     staffRegion: {
       type: String,
       enum: STAFF_REGION
