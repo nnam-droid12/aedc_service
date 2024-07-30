@@ -2,24 +2,28 @@ import { Request, Response } from 'express';
 import { Document } from 'mongoose';
 
 import { createDeptApiValidator } from '../api_validators/department-api-validators.js';
+import { createMeterApiValidator } from '../api_validators/meter-api-validators.js';
 import { advancedResults } from '../helpers/query.js';
 import Logger from '../libs/logger.js';
 import Department, { DepartmentDocumentResult } from '../models/DepartmentModel/DepartmentModel.js';
+import Meter from '../models/MeterModel/MeterModel.js';
 import { DepartmentDoc, RegisterDeptRequestBody } from '../types/department.js';
+import { RegisterMeterRequestBody } from '../types/meter.js';
 
-export const createDepartment = async (req: Request, res: Response) => {
-  const body = req.body as RegisterDeptRequestBody;
-  const { name, acronym } = body;
+export const createMeter = async (req: Request, res: Response) => {
+  const body = req.body as RegisterMeterRequestBody;
+  const { name, meterNumber, typeOfMeter, vendor } = body;
   try {
-    const { error } = createDeptApiValidator.validate(req.body);
+    const { error } = createMeterApiValidator.validate(req.body);
     if (error) {
       return res.status(422).json({ error: error.details[0].message });
     }
-    const newDept = new Department({ name, acronym });
+    const createdBy = req.staff._id;
+    const newDept = new Meter({ name, meterNumber, typeOfMeter, vendor, createdBy });
     await newDept.save();
     return res.status(201).json({
       status: 'success',
-      message: 'Department created successfully',
+      message: 'Meter created successfully',
       data: newDept
     });
   } catch (error) {

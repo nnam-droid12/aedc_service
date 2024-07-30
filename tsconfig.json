@@ -10,6 +10,6 @@
     "forceConsistentCasingInFileNames": true,
     "typeRoots": ["src/types"]
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/routes/meterRoutests"],
   "exclude": ["node_modules/**/*", "dist/**/*"]
 }
