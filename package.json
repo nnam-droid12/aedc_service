@@ -2,7 +2,7 @@
   "name": "aedc-services",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "index.ts",
   "type": "module",
   "scripts": {
     "build": "tsc",

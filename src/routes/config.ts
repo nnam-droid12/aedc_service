@@ -1,6 +1,8 @@
 import { Router } from 'express';
 
+import authRouter from './authRoutes.js';
 import indexRouter from './index.js';
+import staffRouter from './staffRoutes.js';
 import vendorRouter from './VendorRoutes.js';
 
 export type RouteConfig = {
@@ -10,7 +12,7 @@ export type RouteConfig = {
 
 export const routerConfig: RouteConfig[] = [
   { route: '/', router: indexRouter },
-  { route: '/vendors', router: vendorRouter },
-
-  
+  { route: '/auth', router: authRouter },
+  { route: '/staff', router: staffRouter },
+  { route: '/vendors', router: vendorRouter }
 ];

@@ -1,11 +1,15 @@
+
 import { Router } from 'express';
 
-import { createVendor, getVendorById, updateVendor } from '../controllers/vendor_controller.js';
+import { createVendor, getVendorById, getVendors, updateVendor } from '../controllers/vendor_controller.js';
+import { authorize, restrictToRoles } from '../middleware/permission-middleware.js';
 
 const router = Router();
 
-router.get('/:id', getVendorById);
-router.post('/', createVendor);
-router.put('/:id', updateVendor);
+router.get('/all', authorize, restrictToRoles(['staff', 'admin']), getVendors);
+router.post('/', authorize, restrictToRoles(['staff']), createVendor);
+router.get('/:id', authorize, restrictToRoles(['staff', 'admin']), getVendorById);
+router.put('/:id', authorize, restrictToRoles(['staff']), updateVendor);
 
 export default router;
+

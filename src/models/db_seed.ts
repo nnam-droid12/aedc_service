@@ -1,7 +1,8 @@
+import mongoose from 'mongoose';
+
 import Logger from '../libs/logger.js';
 import Staff from './StaffModel/StaffModel.js';
 import Vendor from './VendorModel/VendorModel.js';
-import mongoose from 'mongoose';
 
 const userSeedData = [
   {

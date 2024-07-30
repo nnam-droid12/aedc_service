@@ -1,5 +1,11 @@
 import winston from 'winston';
 
+type LogInfo = {
+  timestamp: string;
+  level: string;
+  message: string;
+};
+
 const levels = {
   error: 0,
   warn: 1,
@@ -23,18 +29,18 @@ const colors = {
 
 winston.addColors(colors);
 
-const logFormat = winston.format.combine(
+const format = winston.format.combine(
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
   winston.format.colorize({ all: true }),
-  winston.format.printf(info => `${info.timestamp} ${info.level}: ${info.message}`)
+  winston.format.printf((info: LogInfo) => `${info.timestamp} ${info.level}: ${info.message}`)
 );
 
-const transports = [new winston.transports.Console()];
+const transports: winston.transport[] = [new winston.transports.Console()];
 
 const Logger = winston.createLogger({
   level: level(),
   levels,
-  format: logFormat,
+  format,
   transports
 });
 
