@@ -3,6 +3,7 @@ import { Router } from 'express';
 import authRouter from './authRoutes.js';
 import departmentRouter from './departmentRoutes.js';
 import indexRouter from './index.js';
+import meterRouter from './meterRoutes.js';
 import staffRouter from './staffRoutes.js';
 import vendorRouter from './vendorRoutes.js';
 
@@ -17,4 +18,5 @@ export const routerConfig: RouteConfig[] = [
   { route: '/staff', router: staffRouter },
   { route: '/department', router: departmentRouter },
   { route: '/vendors', router: vendorRouter }
+  { route: '/meter', router: meterRouter }
 ];

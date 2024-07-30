@@ -1,12 +1,12 @@
 import fs from 'fs';
 import handlebars from 'handlebars';
-import { USER_ROLE, UserDoc } from 'khufu-legos';
 import nodemailer from 'nodemailer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 import Logger from '../libs/logger.js';
-import User from '../models/UserModel/UserModel.js';
+import Staff from '../models/StaffModel/StaffModel.js';
+import { STAFF_ROLE, StaffDoc } from '../types/staff.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,7 +20,7 @@ const SMTP_PASSWORD = process.env.SMTP_PASSWORD ?? '';
 
 type TriggerEmailParams<T> = {
   doc: T;
-  roles: USER_ROLE[];
+  roles: STAFF_ROLE[];
   template: string;
   subject: string;
 };
@@ -34,7 +34,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-export const sendMail = async <T>(data: TriggerEmailParams<T>, user: UserDoc) => {
+export const sendMail = async <T>(data: TriggerEmailParams<T>, user: StaffDoc) => {
   try {
     const emailData = {
       user,
@@ -62,7 +62,7 @@ export const sendMail = async <T>(data: TriggerEmailParams<T>, user: UserDoc) =>
 };
 
 export const triggerEmail = async <T>(document: TriggerEmailParams<T>) => {
-  const users = await User.find({ role: { $in: document.roles } }).lean();
+  const users = await Staff.find({ role: { $in: document.roles } }).lean();
   for (const user of users) {
     await sendMail(document, user);
   }

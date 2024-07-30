@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
 
-import { AdvancedQueryResult } from '../queryresults.js';
+import { AdvancedQueryResult } from './queryresults.js';
 
 export enum STAFF_ROLE {
   ADMIN = 'admin',

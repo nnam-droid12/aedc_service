@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node-esm ./src/index.ts | pino-pretty",
+    "start": "ts-node-esm ./dist/index.js | pino-pretty",
     "dev": "nodemon --exec node --env-file=.env.development --loader ts-node/esm src/index.ts",
     "local": "nodemon --exec node --env-file=.env.local --loader ts-node/esm src/index.ts",
     "production": "nodemon --exec node --env-file=.env.production --loader ts-node/esm src/index.ts",
