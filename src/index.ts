@@ -4,7 +4,7 @@ import app from './app.js';
 import Logger from './libs/logger.js';
 import { seedDBdata } from './models/db_seed.js';
 
-const MONGO_URL = process.env.MONGO_URL || '';
+const MONGO_URL = process.env.MONGO_URL || 'mongodb+srv://kadismile:1OgieIsKinG*@cluster10.qonus7y.mongodb.net/';
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const PORT = process.env.PORT || 8000;
 
