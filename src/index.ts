@@ -4,14 +4,12 @@ import app from './app.js';
 import Logger from './libs/logger.js';
 import { seedDBdata } from './models/db_seed.js';
 
-const MONGO_URL = process.env.MONGO_URL || 'mongodb+srv://kadismile:1OgieIsKinG*@cluster10.qonus7y.mongodb.net/';
+const MONGO_URL = process.env.MONGO_URL || '';
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const PORT = process.env.PORT || 8000;
 
-Logger.info('MONGO URL ------------>>>>', MONGO_URL);
-
 mongoose
-  .connect('mongodb+srv://kadismile:1OgieIsKinG*@cluster10.qonus7y.mongodb.net/')
+  .connect(MONGO_URL)
   .then(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     seedDBdata();
