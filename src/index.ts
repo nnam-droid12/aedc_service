@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 8000;
 Logger.info('MONGO URL ------------>>>>', MONGO_URL);
 
 mongoose
-  .connect(MONGO_URL)
+  .connect('mongodb+srv://kadismile:1OgieIsKinG*@cluster10.qonus7y.mongodb.net/')
   .then(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     seedDBdata();
