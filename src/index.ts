@@ -8,6 +8,8 @@ const MONGO_URL = process.env.MONGO_URL || 'mongodb+srv://kadismile:1OgieIsKinG*
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const PORT = process.env.PORT || 8000;
 
+Logger.info('MONGO URL ------------>>>>', MONGO_URL);
+
 mongoose
   .connect(MONGO_URL)
   .then(() => {
