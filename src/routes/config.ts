@@ -19,4 +19,5 @@ export const routerConfig: RouteConfig[] = [
   { route: '/department', router: departmentRouter },
   { route: '/meter', router: meterRouter },
   { route: '/vendor', router: vendorRouter }
+
 ];
