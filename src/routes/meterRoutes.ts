@@ -1,14 +1,13 @@
 import express from 'express';
 
-import { createMeter } from '../controllers/meter_controller.js';
-import { authorizeStaff, changePassword, loginStaff } from '../controllers/staff_controller.js';
+import { createMeter, getMeter, getMeters, updateMeter } from '../controllers/meter_controller.js';
 import { authorize, restrictToRoles } from '../middleware/permission-middleware.js';
 
 const router = express.Router();
 
 router.post('/', authorize, restrictToRoles(['admin']), createMeter);
-router.post('/login', loginStaff);
-router.put('/change-password', authorize, changePassword);
-router.post('/authorized', authorize, authorizeStaff);
+router.get('/', getMeters);
+router.get('/:id', getMeter);
+router.put('/update-meter', authorize, updateMeter);
 
 export default router;
