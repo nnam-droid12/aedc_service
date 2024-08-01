@@ -10,7 +10,7 @@ import { advancedResults } from '../helpers/query.js';
 import { passwordGenerator, sanitizeReturnedStaff } from '../helpers/staff_helper.js';
 import Logger from '../libs/logger.js';
 import Staff, { StaffDocumentResult } from '../models/StaffModel/StaffModel.js';
-import { RegisterStaffRequestBody, StaffDoc } from '../types/staff/staff.js';
+import { RegisterStaffRequestBody, StaffDoc } from '../types/staff.js';
 
 export const createStaff = async (req: Request, res: Response) => {
   const body = req.body as RegisterStaffRequestBody;

@@ -1,4 +1,4 @@
-import { SanitizedStaffDoc, StaffDoc } from '../types/staff/staff.js';
+import { SanitizedStaffDoc, StaffDoc } from '../types/staff.js';
 
 export const sanitizeReturnedStaff = (staff: StaffDoc): SanitizedStaffDoc => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
