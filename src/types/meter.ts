@@ -3,10 +3,16 @@ import { Types } from 'mongoose';
 import { AdvancedQueryResult } from './queryresults.js';
 
 export enum METER_TYPE {
-  SINGLE_METER = 'single meter',
-  THREE_PHASE_METER = '3 phase meter',
-  TWO_PHASE_METER = '2 phase meter',
+  SINGLE_METER = 'single phase meter',
+  THREE_PHASE_METER = 'three phase meter',
+  TWO_PHASE_METER = 'two phase meter',
   FEEDER_METER = 'feeder meter'
+}
+
+export enum METER_STATUS {
+  VERIFIED = 'verified',
+  INSTALLED = 'installed',
+  ASSIGNED = 'assigned'
 }
 
 export type MeterDoc = {
@@ -14,14 +20,15 @@ export type MeterDoc = {
   id: string;
   name: string;
   meterNumber: string;
+  meterStatus: METER_STATUS;
   typeOfMeter: METER_TYPE;
   meterHistory: string[];
   customer: Types.ObjectId;
   vendor: Types.ObjectId;
-  createdAt: Date;
   createdBy: Types.ObjectId;
+  updatedBy: Types.ObjectId;
+  createdAt: Date;
   updatedAt: Date;
-  isActive: boolean;
 };
 
 export type AdvancedMeterQueryResult = AdvancedQueryResult<MeterDoc>;
