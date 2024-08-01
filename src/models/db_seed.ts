@@ -34,6 +34,12 @@ const staffSeedData = [
     createdBy: '66056a0b8cddbeac52b7221f'
   }
 ];
+/* const meterData: MeterDoc = [
+  { 
+    meterNumber : generateRandomNumber(11),
+    typeOfMeter: getRandomMeterType(),
+  }
+] */
 
 export const seedDBdata = async () => {
   try {

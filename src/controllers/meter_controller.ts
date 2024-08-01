@@ -10,7 +10,7 @@ import { MeterDoc, RegisterMeterRequestBody } from '../types/meter.js';
 
 export const createMeter = async (req: Request, res: Response) => {
   const body = req.body as RegisterMeterRequestBody;
-  const { name, meterNumber, typeOfMeter, vendor, meterStatus } = body;
+  const { meterNumber, typeOfMeter, vendor, meterStatus } = body;
   try {
     const { error } = createMeterApiValidator.validate(req.body);
     if (error) {
@@ -20,7 +20,7 @@ export const createMeter = async (req: Request, res: Response) => {
     // TODO: implement meter history here
     //const history = generateMeterHistory(meterStatus, customer)
 
-    const newDept = new Meter({ name, meterNumber, typeOfMeter, vendor, createdBy, meterStatus });
+    const newDept = new Meter({ meterNumber, typeOfMeter, vendor, createdBy, meterStatus });
     await newDept.save();
     return res.status(201).json({
       status: 'success',

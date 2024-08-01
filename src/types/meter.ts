@@ -18,12 +18,11 @@ export enum METER_STATUS {
 export type MeterDoc = {
   _id: Types.ObjectId;
   id: string;
-  name: string;
   meterNumber: string;
   meterStatus: METER_STATUS;
   typeOfMeter: METER_TYPE;
   meterHistory: string[];
-  customer: Types.ObjectId;
+  customer?: Types.ObjectId;
   vendor: Types.ObjectId;
   createdBy: Types.ObjectId;
   updatedBy: Types.ObjectId;
