@@ -24,10 +24,6 @@ const meterSchema = new mongoose.Schema<MeterDocumentResult, MeterModel>(
       required: true,
       unique: true
     },
-    name: {
-      type: String,
-      required: true
-    },
     typeOfMeter: {
       type: String,
       enum: METER_TYPE,
