@@ -171,7 +171,7 @@ export const seedDBdata = async () => {
       }
     }
 
-    if (meterCount < 1001) {
+    if (meterCount < 1) {
       const customers = await Customer.find().limit(1500);
       const customerMap = customers.map((customer, index): MapCustomerDoc => {
         return {
