@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import authRouter from './authRoutes.js';
+import customerRouter from './customerRoutes.js';
 import departmentRouter from './departmentRoutes.js';
 import indexRouter from './index.js';
 import meterRouter from './meterRoutes.js';
@@ -18,6 +19,6 @@ export const routerConfig: RouteConfig[] = [
   { route: '/staff', router: staffRouter },
   { route: '/department', router: departmentRouter },
   { route: '/meter', router: meterRouter },
-  { route: '/vendor', router: vendorRouter }
-
+  { route: '/vendor', router: vendorRouter },
+  { route: '/customer', router: customerRouter }
 ];

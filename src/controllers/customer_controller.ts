@@ -1,31 +1,33 @@
 import { Request, Response } from 'express';
 import { Document } from 'mongoose';
 
-import { createVendorApiValidator } from '../api_validators/vendor-api-validator.js';
+import { createCustomerApiValidator } from '../api_validators/customer-api-validator.js';
 import { advancedResults } from '../helpers/query.js';
 import Logger from '../libs/logger.js';
-import Vendor, { VendorDocumentResult } from '../models/VendorModel/VendorModel.js';
-import { RegisterVendorRequestBody, VendorDoc } from '../types/vendor.js';
+import Customer, { CustomerDocumentResult } from '../models/CustomerModel/CustomerModel.js';
+import { CustomerDoc, RegisterCustomerRequestBody } from '../types/customer.js';
 
-export const createVendor = async (req: Request, res: Response) => {
-  const body = req.body as RegisterVendorRequestBody;
-  const { name, address, phoneNumber } = body;
+export const createCustomer = async (req: Request, res: Response) => {
+  const body = req.body as RegisterCustomerRequestBody;
+  const { name, phoneNumber, address } = body;
   try {
-    const { error } = createVendorApiValidator.validate(req.body);
+    const { error } = createCustomerApiValidator.validate(req.body);
     if (error) {
       return res.status(422).json({ error: error.details[0].message });
     }
-    const newVendor = new Vendor({
+
+    const newCustomer = new Customer({
       name,
-      address,
       phoneNumber,
+      address,
       createdBy: req.staff._id
     });
-    await newVendor.save();
+
+    await newCustomer.save();
     return res.status(201).json({
       status: 'success',
-      message: 'Vendor created successfully',
-      data: newVendor
+      message: 'Customer created successfully',
+      data: newCustomer
     });
   } catch (error) {
     Logger.error(error);
@@ -33,13 +35,12 @@ export const createVendor = async (req: Request, res: Response) => {
   }
 };
 
-// get all vendor
-export const getVendors = async (req: Request, res: Response) => {
+export const getCustomers = async (req: Request, res: Response) => {
   try {
-    const vendors = await advancedResults<VendorDoc, VendorDocumentResult & Document>(req.url, Vendor);
+    const customers = await advancedResults<CustomerDoc, CustomerDocumentResult & Document>(req.url, Customer);
     return res.status(200).json({
       status: 'success',
-      data: vendors
+      data: customers
     });
   } catch (error) {
     Logger.error(error);
@@ -47,21 +48,20 @@ export const getVendors = async (req: Request, res: Response) => {
   }
 };
 
-// Get single vendor by ID
-export const getVendor = async (req: Request, res: Response) => {
+export const getCustomer = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const vendor = await Vendor.findOne<VendorDocumentResult>({ _id: id });
-    if (!vendor) {
+    const customer = await Customer.findOne<CustomerDocumentResult>({ _id: id });
+    if (!customer) {
       return res.status(404).json({
         status: 'failed',
-        message: `Department not found with id ${id}`
+        message: `Customer not found with id ${id}`
       });
     }
 
     return res.status(200).json({
       status: 'success',
-      data: vendor
+      data: customer
     });
   } catch (error) {
     Logger.error(error);
@@ -69,18 +69,17 @@ export const getVendor = async (req: Request, res: Response) => {
   }
 };
 
-// Update vendor
-export const updateVendor = async (req: Request, res: Response) => {
-  const body = req.body as RegisterVendorRequestBody;
-  const { name, address, phoneNumber } = body;
+export const updateCustomer = async (req: Request, res: Response) => {
+  const body = req.body as RegisterCustomerRequestBody;
+  const { name, phoneNumber, address } = body;
   const { id } = req.params;
   try {
-    const { error } = createVendorApiValidator.validate(req.body);
+    const { error } = createCustomerApiValidator.validate(req.body);
     if (error) {
       return res.status(422).json({ error: error.details[0].message });
     }
     if (id) {
-      await Vendor.findByIdAndUpdate({ _id: id }, { name, address, phoneNumber });
+      await Customer.findByIdAndUpdate({ _id: id }, { name, phoneNumber, address });
       return res.status(200).json({
         status: 'success'
       });
