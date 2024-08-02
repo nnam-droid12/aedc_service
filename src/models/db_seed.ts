@@ -115,6 +115,7 @@ const createMeterData = async () => {
   const meterData = [
     {
       meterNumber: generateRandomNumber(11),
+      barcode: generateRandomNumber(15),
       typeOfMeter: getRandomMeterType(),
       vendor,
       createdBy,

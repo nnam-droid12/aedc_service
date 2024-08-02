@@ -4,6 +4,7 @@ import { METER_STATUS, METER_TYPE } from '../types/meter.js';
 
 export const createMeterApiValidator = Joi.object({
   meterNumber: Joi.string().required(),
+  barcode: Joi.string().required(),
   typeOfMeter: Joi.string().valid(METER_TYPE).required(),
   meterStatus: Joi.string().valid(METER_STATUS).required(),
   vendor: Joi.string().required()
