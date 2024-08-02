@@ -24,6 +24,11 @@ const meterSchema = new mongoose.Schema<MeterDocumentResult, MeterModel>(
       required: true,
       unique: true
     },
+    barcode: {
+      type: String,
+      required: true,
+      unique: true
+    },
     typeOfMeter: {
       type: String,
       enum: METER_TYPE,

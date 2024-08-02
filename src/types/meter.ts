@@ -19,6 +19,7 @@ export type MeterDoc = {
   _id: Types.ObjectId;
   id: string;
   meterNumber: string;
+  barcode: string;
   meterStatus: METER_STATUS;
   typeOfMeter: METER_TYPE;
   meterHistory: string[];

@@ -10,7 +10,7 @@ import { MeterDoc, RegisterMeterRequestBody } from '../types/meter.js';
 
 export const createMeter = async (req: Request, res: Response) => {
   const body = req.body as RegisterMeterRequestBody;
-  const { meterNumber, typeOfMeter, vendor, meterStatus } = body;
+  const { meterNumber, typeOfMeter, vendor, meterStatus, barcode } = body;
   try {
     const { error } = createMeterApiValidator.validate(req.body);
     if (error) {
@@ -20,7 +20,7 @@ export const createMeter = async (req: Request, res: Response) => {
     // TODO: implement meter history here
     //const history = generateMeterHistory(meterStatus, customer)
 
-    const newDept = new Meter({ meterNumber, typeOfMeter, vendor, createdBy, meterStatus });
+    const newDept = new Meter({ meterNumber, typeOfMeter, vendor, createdBy, meterStatus, barcode });
     await newDept.save();
     return res.status(201).json({
       status: 'success',
@@ -90,6 +90,26 @@ export const getMeters = async (req: Request, res: Response) => {
     return res.status(200).json({
       status: 'success',
       data: staffs
+    });
+  } catch (error) {
+    Logger.error(error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+export const getByBarcode = async (req: Request, res: Response) => {
+  const { barcode } = req.params;
+  try {
+    const meter = await Meter.findOne<MeterDocumentResult>({ barcode: barcode });
+    if (!meter) {
+      return res.status(404).json({
+        status: 'failed',
+        message: `Meter not found with barcode ${barcode}`
+      });
+    }
+    return res.status(200).json({
+      status: 'success',
+      data: meter
     });
   } catch (error) {
     Logger.error(error);
