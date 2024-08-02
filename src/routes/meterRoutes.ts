@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { createMeter, getMeter, getMeters, updateMeter } from '../controllers/meter_controller.js';
+import { createMeter, getByBarcode, getMeter, getMeters, updateMeter } from '../controllers/meter_controller.js';
 import { authorize, restrictToRoles } from '../middleware/permission-middleware.js';
 
 const router = express.Router();
