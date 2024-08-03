@@ -116,3 +116,43 @@ export const getByBarcode = async (req: Request, res: Response) => {
     return res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+export const getMeterByVendor = async (req: Request, res: Response) => {
+  try {
+    const result = await Meter.aggregate([
+      {
+        $group: {
+          _id: '$vendor', // Group by vendor ObjectId
+          count: { $sum: 1 } // Count the number of meters for each vendor
+        }
+      },
+      {
+        $lookup: {
+          from: 'vendors', // Name of the collection where vendor details are stored
+          localField: '_id', // Field to join on (vendor ObjectId)
+          foreignField: '_id', // Field in the vendors collection to match (vendor ObjectId)
+          as: 'vendorDetails' // Name of the field to output
+        }
+      },
+      {
+        $unwind: '$vendorDetails' // Flatten the vendorDetails array
+      },
+      {
+        $project: {
+          _id: 0, // Exclude the _id field
+          vendorID: '$_id', // Include vendorID
+          vendorName: '$vendorDetails.name', // Include vendorName
+          count: 1 // Include the count of meters
+        }
+      }
+    ]);
+
+    return res.status(200).json({
+      status: 'success',
+      data: result
+    });
+  } catch (error) {
+    Logger.error(error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};

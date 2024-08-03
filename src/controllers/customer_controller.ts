@@ -91,3 +91,31 @@ export const updateCustomer = async (req: Request, res: Response) => {
     return res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+export const getCustomersByState = async (req: Request, res: Response) => {
+  try {
+    const result = await Customer.aggregate([
+      {
+        $group: {
+          _id: '$address.state',
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          state: '$_id',
+          count: 1
+        }
+      }
+    ]);
+
+    return res.status(200).json({
+      status: 'success',
+      data: result
+    });
+  } catch (error) {
+    Logger.error(error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
